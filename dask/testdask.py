@@ -47,15 +47,15 @@ def main(_):
     future = client.map(calcov.calCov, B, D)
     result = [[np.array(_[0]),str(_[1]),str(_[2])] for _ in client.gather(future)]
 
-    shutil.rmtree(r'./data', ignore_errors=True)
-    os.mkdir(r'./data')
+    shutil.rmtree(r'./data-%d' % (args.queue), ignore_errors=True)
+    os.mkdir(r'./data-%d' % (args.queue))
     i = 0
     for _ in result:
         data=_[0]
         time=_[1]
         name = _[2].strip('tcp://')
         new_im = Image.fromarray(data)
-        new_im.save('./data/result_%s_%s_(%s).jpg' % (i,time,name))
+        new_im.save('./data-%d/result_%s_%s_(%s).jpg' % (args.queue,i,time,name))
         i += 1
 
 
