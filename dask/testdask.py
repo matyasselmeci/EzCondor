@@ -26,10 +26,10 @@ import argparse
 args = None
 
 def main(_):
+    client = Client(args.address)
+    #client.upload_file('calcov.py')
     #Generate scheduler
     data = da.from_array(np.array(Image.open(r'dota2.jpg')), chunks=(600, 400, 3))
-    client = Client(args.address)
-    client.upload_file('calcov.py')
 
     temp3 = np.zeros((3, 3))
     temp3[0, :] = [0.062467, 0.125000, 0.062467]
